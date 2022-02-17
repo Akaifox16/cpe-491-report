@@ -18,80 +18,173 @@
 %\vspace{2ex}
 % \titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{}
 % \titlespacing*{\section}{0pt}{10ex}{0pt}
+% \begin{figure}
+% \begin{center}
+% \includegraphics{photo/800px-Briny_Beach.jpg}
+% \end{center}
+% \caption[Poem]{The Walrus and the Carpenter}
+% \label{fig:walrus}
+% \end{figure}
 
-\section{Alice in Wonderland}
-
-\begin{figure}
+\section{Software Architecture}
+เว็บแอพพลิเคชันใช้ Three tier architecture ในการออกแบบระบบ โดย Front-end ใช้ Next.js 
+ที่เป็น React framework ส่วนBack-end ใช้ Gin Gonic ซึ่งเป็น Go framework ติดต่อกับ Front-end 
+ด้วย GraphQL API และฐานข้อมูลใช้ mySQL เป็น relational database management system(RDBMS)
+\begin{figure}[h]
 \begin{center}
-\includegraphics{800px-Briny_Beach.jpg}
+\includegraphics[width=50mm,scale=0.5]{photo/threetierarch.png}
 \end{center}
-\caption[Poem]{The Walrus and the Carpenter}
-\label{fig:walrus}
+\caption{three tier architecture}
+\label{fig:three-tier}
 \end{figure}
 
-\subsection{The Black Kitten}
-  One thing was certain, that the WHITE kitten had had nothing to
-do with it:---it was the black kitten's fault entirely~\cite{aiw}.  For the
-white kitten had been having its face washed by the old cat for
-the last quarter of an hour (and bearing it pretty well,
-considering); so you see that it COULDN'T have had any hand in
-the mischief.
+\section{Feature}
+\subsection{End-user}
+\begin{enumerate}
+  \item ระบบยืนยันตัวตน : ให้ผูู้ใช้ลงทะเบียนสมัครสมาชิกและเข้าสู่ระบบเพื่อที่จะสามารถใช้งานระบบต่างๆของระบบได้ต่อไป
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/homepageNoAuth.png}
+  \end{center}
+  \caption{homepage ที่ผู้ใช้ยังไม่ได้เข้าสู่ระบบ}
+  \label{fig:hp-no-auth}
+  \end{figure}
 
-  The way Dinah washed her children's faces was this:  first she
-held the poor thing down by its ear with one paw, and then with
-the other paw she rubbed its face all over, the wrong way,
-beginning at the nose:  and just now, as I said, she was hard at
-work on the white kitten, which was lying quite still and trying
-to purr---no doubt feeling that it was all meant for its good.
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/homepageLogin.png}
+  \end{center}
+  \caption{homepage ขณะกำลังจะเข้าสู่ระบบ}
+  \label{fig:hp-login}
+  \end{figure}
 
-  But the black kitten had been finished with earlier in the
-afternoon, and so, while Alice was sitting curled up in a corner
-of the great arm-chair, half talking to herself and half asleep,
-the kitten had been having a grand game of romps with the ball of
-worsted Alice had been trying to wind up, and had been rolling it
-up and down till it had all come undone again; and there it was,
-spread over the hearth-rug, all knots and tangles, with the
-kitten running after its own tail in the middle.
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/homepageReg.png}
+  \end{center}
+  \caption{homepage ที่ผู้ใช้กำลังสมัครสมาชิก}
+  \label{fig:hp-reg}
+  \end{figure}
 
-\subsection{The Reproach}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/homepageAuth.png}
+  \end{center}
+  \caption{homepage ที่ผู้ใช้เข้าสู่ระบบแล้ว}
+  \label{fig:hp-auth}
+  \end{figure}
 
-  `Oh, you wicked little thing!' cried Alice, catching up the
-kitten, and giving it a little kiss to make it understand that it
-was in disgrace.  `Really, Dinah ought to have taught you better
-manners!  You OUGHT, Dinah, you know you ought!' she added,
-looking reproachfully at the old cat, and speaking in as cross a
-voice as she could manage---and then she scrambled back into the
-arm-chair, taking the kitten and the worsted with her, and began
-winding up the ball again.  But she didn't get on very fast, as
-she was talking all the time, sometimes to the kitten, and
-sometimes to herself.  Kitty sat very demurely on her knee,
-pretending to watch the progress of the winding, and now and then
-putting out one paw and gently touching the ball, as if it would
-be glad to help, if it might.
+  \item ระบบการจัดอันดับคุณลักษณะ : ให้ผู้ใช้ที่ลงชื่อเข้าใช้แล้วเลือกคุณสมบัติของห้องและเพื่อนร่วมห้องที่ต้องการ
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/Preference.png}
+  \end{center}
+  \caption{หน้า preference ให้ผู้ใช้เลือกคุณลักษณะที่ต้องการ}
+  \label{fig:preference}
+  \end{figure}
+  
+  \item ระบบปรับจูนคุณลักษณะ : ระบบจะทำการนำโปรไฟล์ของผู้ใช้มาแสดงให้ผู้ใช้เลือกว่าหากเป็นเพื่อนร่วมห้องที่มี
+  คุณลักษณะตามโปรไฟล์ ผู้ใช้จะเลือกเพื่อนร่วมห้องคนนั้นหรือไม่ เพื่อคำนวณหาระดับความใส่ใจในคุณลักษณะต่างๆของผู้ใช้ 
+  ตัวอย่างดังรูปที่ 3.6
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/finetune.png}
+  \end{center}
+  \caption{หน้า fine tune}
+  \label{fig:finetune}
+  \end{figure}
 
-  `Do you know what to-morrow is, Kitty?' Alice began.  `You'd
-have guessed if you'd been up in the window with me---only Dinah
-was making you tidy, so you couldn't.  I was watching the boys
-getting in stick for the bonfire---and it wants plenty of
-sticks, Kitty!  Only it got so cold, and it snowed so, they had
-to leave off.  Never mind, Kitty, we'll go and see the bonfire
-to-morrow.'  Here Alice wound two or three turns of the worsted
-round the kitten's neck, just to see how it would look:  this led
-to a scramble, in which the ball rolled down upon the floor, and
-yards and yards of it got unwound again.
+  \item ระบบรายงานสรุปผล : แสดงความคืบหน้าว่า ณ ปัจจุบันผู้ใช้มีโอกาสจะได้จับคู่กับเพื่อนร่วมห้องที่มีคุณลักษณะอย่างไร 
+        และจะได้ห้องแบบใด 
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/resultSelectedProfile.png}
+  \end{center}
+  \caption{หน้าสรุปผล 10 อันดับสูงสุดที่มีโอกาสได้จับคู่กับผู้ใช้}
+  \label{fig:select-profile}
+  \end{figure}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/resultPreferenceSummary.png}
+  \end{center}
+  \caption{หน้าสรุปผลคุณลักษณะที่ผู้ใช้ให้ความสนใจ}
+  \label{fig:summary}
+  \end{figure}
 
-  `Do you know, I was so angry, Kitty,' Alice went on as soon as
-they were comfortably settled again, `when I saw all the mischief
-you had been doing, I was very nearly opening the window, and
-putting you out into the snow!  And you'd have deserved it, you
-little mischievous darling!  What have you got to say for
-yourself?  Now don't interrupt me!' she went on, holding up one
-finger.  `I'm going to tell you all your faults.  Number one:
-you squeaked twice while Dinah was washing your face this
-morning.  Now you can't deny it, Kitty:  I heard you!  What that
-you say?' (pretending that the kitten was speaking.)  `Her paw
-went into your eye?  Well, that's YOUR fault, for keeping your
-eyes open---if you'd shut them tight up, it wouldn't have
-happened.  Now don't make any more excuses, but listen!  Number
-two:  you pulled Snowdrop away by the tail just as I had put down
-the saucer of milk before her!  What, you were thirsty, were you?
+  \item ระบบคู่มือการใช้งาน : แสดงคู่มือการใช้งานของระบบสำหรับผู้ใช้ทั่วไป ไม่รวมผู้ใช้ที่เป็นผู้ดูแลระบบ
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/Guideline.png}
+  \end{center}
+  \caption{หน้าคู่มือการใช้งาน}
+  \label{fig:guideline}
+  \end{figure}
+
+  \item ระบบโปรไฟล์ผู้ใช้ : ให้ผู้ใช้เข้าไปปรับแต่งคุณลักษณะของตนเองเพื่อนำไปใช้ในการจับคู่กับผู้อื่น
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/profile.png}
+  \end{center}
+  \caption{หน้าโปรไฟล์}
+  \label{fig:profile}
+  \end{figure}
+  
+\end{enumerate}
+\subsection{Administrator}
+\begin{enumerate}
+  \item ระบบจัดการเวลาเปิด-ปิดวันลงทะเบียน : ให้ผู้ดูแลระบบสามารถตั้งค่าเวลาเปิด-ปิด
+  วันลงทะเบียนของผู้ใช้ทั่วไป
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/adminDashboard.png}
+  \end{center}
+  \caption{หน้า homepage ของผู้ดูแลระบบ}
+  \label{fig:dashboard}
+  \end{figure}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/datepicker.png}
+  \end{center}
+  \caption{ตัวอย่างการเปลี่ยนวันที่เปิด-ปิดระบบ}
+  \label{fig:datepicker}
+  \end{figure}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/timepicker.png}
+  \end{center}
+  \caption{ตัวอย่างการเปลี่ยนเวลาที่เปิด-ปิดระบบ}
+  \label{fig:timepicker}
+  \end{figure}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/confirmation.png}
+  \end{center}
+  \caption{ตัวอย่างแจ้งเตือนเพื่อยืนยันการตั้งค่า}
+  \label{fig:confirm-date-time}
+  \end{figure}
+
+  \item ระบบจัดการฐานข้อมูลและการตั้งค่าหอพักที่ใช้ในการลงทะเบียน : ให้ผู้ดูแลสามารถเลือกจัดการห้องและหอที่จะเปิดให้ลงทะเบียน
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/dormmgmt.png}
+  \end{center}
+  \caption{หน้าการจัดการหอพักของระบบจอง}
+  \label{fig:mgmt}
+  \end{figure}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/dormadd.png}
+  \end{center}
+  \caption{หน้าการเพิ่มหอพักในระบบลงทะเบียน}
+  \label{fig:add-dorm}
+  \end{figure}
+  
+  \item ระบบจัดการไฟล์ที่ใช้ในการจัดการระบบ : ให้ผู้ดูแลระบบสามารถเข้ามาดาว์นโหลดไฟล์ที่ใช้ในการจัดการระบบฐานข้อมูล
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=50mm,scale=0.5]{photo/format.png}
+  \end{center}
+  \caption{หน้าดาว์นโหลดไฟล์}
+  \label{fig:format-db}
+  \end{figure}
+\end{enumerate}
