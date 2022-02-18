@@ -28,9 +28,9 @@
 
 \section{Software architecture}
 \CIreply{add reference to each tool}
-เว็บแอพพลิเคชันใช้ \CI{three-tier architecture}{cite} ในการออกแบบระบบ โดย front-end ใช้ Next.js 
-ที่เป็น React framework ส่วน back-end ใช้ Gin Gonic ซึ่งเป็น Go framework ติดต่อกับ Front-end 
-ด้วย GraphQL API และฐานข้อมูลใช้ mySQL เป็น relational database management system (RDBMS)
+เว็บแอพพลิเคชันใช้ three-tier architecture~\cite{ttarch} ในการออกแบบระบบ โดย front-end ใช้ Next.js\cite{nextjs} 
+ที่เป็น React~\cite{react} framework ส่วน back-end ใช้ Gin Gonic~\cite{gingonic} ซึ่งเป็น Go~\cite{golang} framework ติดต่อกับ Front-end 
+ด้วย GraphQL~\cite{graphql} API และฐานข้อมูลใช้ MySQL~\cite{mysql} เป็น relational database management system (RDBMS)
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=2.5in]{photo/threetierarch.png}
@@ -41,13 +41,20 @@
 
 \section{วิธีการจับคู่}
 \begin{enumerate}
-  \item นำลำดับคุณลักษณะที่ผู้ใช้จัดอันดับไปแปลงเป็นตัวเลขเพื่อใช้เป็นตัวคูณในขั้นตอนต่อๆ ไป
-  \item ปรับปรุงเลข\CI{จาก}{since when?}ขั้นตอนการปรับจูน หากคุณลักษณะใดที่ผู้ใช้ให้ความสนใจบ่อยๆ จะถูกเพิ่มค่าให้มากขึ้น และคุณลักษณะใดที่ผู้ใช้ไม่ให้ความสนใจก็จะถูกลดค่าให้น้อยลง
-  \item นำตัวคูณไปคูณกับค่าของคุณลักษณะที่ผู้ใช้เลือกในขั้นตอน \CI{preference}{which?} แล้วบวกผลคูณทั้งหมดเข้าด้วยกัน เรียกว่า $\mathit{RoommatePref}$
+  \item นำลำดับคุณลักษณะที่ผู้ใช้จัดอันดับไปแปลงเป็นตัวเลขเพื่อใช้เป็นตัวคูณในขั้นตอนต่อๆไป โดยเรียกตัวคูณนั้นว่า $mult$
+  \item เก็บรายการคุณลักษณะที่ผู้ใช้พิจารณาเพื่อนร่วมห้องจากการจัดลำดับในขั้นตอนก่อนหน้าแล้วเรียกว่า $attr$
+  \item ปรับปรุง $mult$ เพิ่มเติมในขั้นตอนการปรับจูน หากคุณลักษณะใดที่ผู้ใช้ให้ความสนใจบ่อยๆ จะถูกเพิ่มค่าให้มากขึ้น และคุณลักษณะใดที่ผู้ใช้ไม่ให้ความสนใจก็จะถูกลดค่าให้น้อยลง 
+        เช่น หากมีโปรไฟล์ที่มีคุณลักษณะดังนี้
+        \begin{enumerate}
+          \item เวลานอนช่วง 4 ทุ่ม - 5 ทุ่ม และ เป็นคนช่างพูด  
+          \item เวลานอนช่วง 4 ทุ่ม - 5 ทุ่ม และ เป็นคนพูดน้อย  
+        \end{enumerate} 
+        แล้วผู้ใช้เลือกทั้งสองโปรไฟล์นั้น ดังนั้นระบบจะทำการปรับเพิ่มค่าในตัวคูณของคุณลักษณะเวลานอนใน $mult$
+  \item นำตัวคูณไปคูณกับค่าของคุณลักษณะที่ผู้ใช้เลือกในขั้นตอน preference หรือก็คือ $attr \times mult$ แล้วบวกผลคูณทั้งหมดเข้าด้วยกัน เรียกว่า $\mathit{RoommatePref}$
   \item ทำแบบข้อก่อนหน้ากับคุณลักษณะของห้องพักที่ต้องการ และ คุณลักษณะตามโปรไฟล์ของผู้ใช้ เรียกว่า $\mathit{RoomPref}$ และ $\mathit{PersonalPref}$ ตามลำดับ\CIreply{ยังไม่ชัดเจนว่า roommateprof กับ personalpref ต่างกันอย่างไร}
   \item สร้างคู่อันดับ $(\mathit{RoomPref}, \mathit{RoommatePref})$ จากค่าของผู้ใช้ เรียกว่า $(x,y)$ 
   \item สร้างคู่อันดับ $(\mathit{RoomPref}, \mathit{PersonalPref})$ ของผู้ใช้คนอื่น เรียกว่า $(x',y')$
-  \item หาคู่อันดับ $(x',y')$ ที่มี\CI{ระยะทาง}{undefined}น้อยที่สุดจาก $(x,y)$ แล้วให้ $(x',y')$ ของผู้ใช้คนนั้นคู่เป็นเพื่อนร่วมห้อง
+  \item หาคู่อันดับ $(x',y')$ ที่มีระยะทางแบบยูคลิด~\cite{euclid-dist}น้อยที่สุดจาก $(x,y)$ แล้วให้ $(x',y')$ ของผู้ใช้คนนั้นคู่เป็นเพื่อนร่วมห้อง
 \end{enumerate}
 
 \section{Features}
