@@ -26,37 +26,38 @@
 % \label{fig:walrus}
 % \end{figure}
 
-\section{Software Architecture}
-เว็บแอพพลิเคชันใช้ Three tier architecture ในการออกแบบระบบ โดย Front-end ใช้ Next.js 
-ที่เป็น React framework ส่วนBack-end ใช้ Gin Gonic ซึ่งเป็น Go framework ติดต่อกับ Front-end 
-ด้วย GraphQL API และฐานข้อมูลใช้ mySQL เป็น relational database management system(RDBMS)
+\section{Software architecture}
+\CIreply{add reference to each tool}
+เว็บแอพพลิเคชันใช้ \CI{three-tier architecture}{cite} ในการออกแบบระบบ โดย front-end ใช้ Next.js 
+ที่เป็น React framework ส่วน back-end ใช้ Gin Gonic ซึ่งเป็น Go framework ติดต่อกับ Front-end 
+ด้วย GraphQL API และฐานข้อมูลใช้ mySQL เป็น relational database management system (RDBMS)
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=50mm,scale=0.5]{photo/threetierarch.png}
+\includegraphics[width=2.5in]{photo/threetierarch.png}
 \end{center}
-\caption{three tier architecture}
+\caption{three-tier architecture}
 \label{fig:three-tier}
 \end{figure}
 
 \section{วิธีการจับคู่}
 \begin{enumerate}
-  \item นำลำดับคุณลักษณะที่ผู้ใช้จัดอันดับไปแปลงเป็นตัวเลขเพื่อใช้เป็นตัวคูณในขั้นตอนต่อๆไป
-  \item ปรับปรุงเลขจากขั้นตอนการปรับจูน หากคุณลักษณะใดที่ผู้ใช้ให้ความสนใจบ่อยๆจะถูกเพิ่มค่าให้มากขึ้นและ 
-        คุณลักษณะใดที่ผู้ใช้ไม่ให้ความสนใจก็จะถูกลดค่าให้น้อยลง
-  \item นำตัวคูณไปคูณกับค่าของคุณลักษณะที่ผู้ใช้เลือกในขั้นตอน preference แล้วบวกผลคูณทั้งหมดเข้าด้วยกัน เรียกว่า $RoommatePref$
-  \item ทำแบบข้อก่อนหน้ากับคุณลักษณะของห้องพักที่ต้องการ และ คุณลักษณะตามโปรไฟล์ของผู้ใช้ เรียกว่า $RoomPref$ และ $PersonalPref$ ตามลำดับ
-  \item สร้างคู่อันดับ $(RoomPref, RoommatePref)$ จากค่าของผู้ใช้ เรียกว่า $(x,y)$ 
-  \item สร้างคู่อันดับ $(RoomPref, PersonalPref)$ ของผู้ใช้คนอื่น เรียกว่า $(x',y')$
-  \item หา ระยะทางระหว่าง $(x,y)$ กับ $(x',y')$ ใดๆที่ใกล้ที่สุด ให้ $(x',y')$ของผู้ใช้คนนั้นคู่เป็นเพื่อนร่วมห้อง
+  \item นำลำดับคุณลักษณะที่ผู้ใช้จัดอันดับไปแปลงเป็นตัวเลขเพื่อใช้เป็นตัวคูณในขั้นตอนต่อๆ ไป
+  \item ปรับปรุงเลข\CI{จาก}{since when?}ขั้นตอนการปรับจูน หากคุณลักษณะใดที่ผู้ใช้ให้ความสนใจบ่อยๆ จะถูกเพิ่มค่าให้มากขึ้น และคุณลักษณะใดที่ผู้ใช้ไม่ให้ความสนใจก็จะถูกลดค่าให้น้อยลง
+  \item นำตัวคูณไปคูณกับค่าของคุณลักษณะที่ผู้ใช้เลือกในขั้นตอน \CI{preference}{which?} แล้วบวกผลคูณทั้งหมดเข้าด้วยกัน เรียกว่า $\mathit{RoommatePref}$
+  \item ทำแบบข้อก่อนหน้ากับคุณลักษณะของห้องพักที่ต้องการ และ คุณลักษณะตามโปรไฟล์ของผู้ใช้ เรียกว่า $\mathit{RoomPref}$ และ $\mathit{PersonalPref}$ ตามลำดับ\CIreply{ยังไม่ชัดเจนว่า roommateprof กับ personalpref ต่างกันอย่างไร}
+  \item สร้างคู่อันดับ $(\mathit{RoomPref}, \mathit{RoommatePref})$ จากค่าของผู้ใช้ เรียกว่า $(x,y)$ 
+  \item สร้างคู่อันดับ $(\mathit{RoomPref}, \mathit{PersonalPref})$ ของผู้ใช้คนอื่น เรียกว่า $(x',y')$
+  \item หาคู่อันดับ $(x',y')$ ที่มี\CI{ระยะทาง}{undefined}น้อยที่สุดจาก $(x,y)$ แล้วให้ $(x',y')$ ของผู้ใช้คนนั้นคู่เป็นเพื่อนร่วมห้อง
 \end{enumerate}
 
-\section{Feature}
+\section{Features}
+\CIreply{ระบุว่าเป็น wireframes ไม่ใช่ actual UI}
 \subsection{End-user}
 \begin{enumerate}
-  \item ระบบยืนยันตัวตน : ให้ผูู้ใช้ลงทะเบียนสมัครสมาชิกและเข้าสู่ระบบเพื่อที่จะสามารถใช้งานระบบต่างๆของระบบได้ต่อไป
+  \item ระบบยืนยันตัวตน: ให้ผูู้ใช้ลงทะเบียนสมัครสมาชิกและเข้าสู่ระบบเพื่อที่จะสามารถใช้งานระบบต่างๆของระบบได้ต่อไป
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/homepageNoAuth.png}
+  \includegraphics[width=\linewidth]{photo/homepageNoAuth.png}
   \end{center}
   \caption{homepage ที่ผู้ใช้ยังไม่ได้เข้าสู่ระบบ}
   \label{fig:hp-no-auth}
@@ -64,7 +65,7 @@
 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/homepageLogin.png}
+  \includegraphics[width=\linewidth]{photo/homepageLogin.png}
   \end{center}
   \caption{homepage ขณะกำลังจะเข้าสู่ระบบ}
   \label{fig:hp-login}
@@ -72,7 +73,7 @@
 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/homepageReg.png}
+  \includegraphics[width=\linewidth]{photo/homepageReg.png}
   \end{center}
   \caption{homepage ที่ผู้ใช้กำลังสมัครสมาชิก}
   \label{fig:hp-reg}
@@ -80,121 +81,130 @@
 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/homepageAuth.png}
+  \includegraphics[width=\linewidth]{photo/homepageAuth.png}
   \end{center}
   \caption{homepage ที่ผู้ใช้เข้าสู่ระบบแล้ว}
   \label{fig:hp-auth}
   \end{figure}
 
-  \item ระบบการจัดอันดับคุณลักษณะ : ให้ผู้ใช้ที่ลงชื่อเข้าใช้แล้วเลือกคุณสมบัติของห้องและเพื่อนร่วมห้องที่ต้องการ
+  \clearpage
+  \item ระบบการจัดอันดับคุณลักษณะ: ให้ผู้ใช้ที่ลงชื่อเข้าใช้แล้วเลือกคุณสมบัติของห้องและเพื่อนร่วมห้องที่ต้องการ
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/Preference.png}
+  \includegraphics[width=\linewidth]{photo/Preference.png}
   \end{center}
   \caption{หน้า preference ให้ผู้ใช้เลือกคุณลักษณะที่ต้องการ}
   \label{fig:preference}
   \end{figure}
   
-  \item ระบบปรับจูนคุณลักษณะ : ระบบจะทำการนำโปรไฟล์ของผู้ใช้มาแสดงให้ผู้ใช้เลือกว่าหากเป็นเพื่อนร่วมห้องที่มี
-  คุณลักษณะตามโปรไฟล์ ผู้ใช้จะเลือกเพื่อนร่วมห้องคนนั้นหรือไม่ เพื่อคำนวณหาระดับความใส่ใจในคุณลักษณะต่างๆของผู้ใช้ 
-  ตัวอย่างดังรูปที่ 3.6
+  \clearpage
+  \item ระบบปรับจูนคุณลักษณะ: ระบบจะทำการนำโปรไฟล์ของบุคคลอื่นๆ มาแสดงให้ผู้ใช้เลือกว่า หากเป็นบุคคลที่มี
+  คุณลักษณะตามโปรไฟล์ ผู้ใช้จะเลือกบุคคลดังกล่าวเป็นเพื่อนร่วมห้องหรือไม่ เพื่อคำนวณหาระดับความใส่ใจในคุณลักษณะต่างๆของผู้ใช้ 
+  ตัวอย่างดังรูปที่~\CI{3.6}{use label/ref; wrong number?}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/finetune.png}
+  \includegraphics[width=\linewidth]{photo/finetune.png}
   \end{center}
   \caption{หน้า fine tune}
   \label{fig:finetune}
   \end{figure}
 
-  \item ระบบรายงานสรุปผล : แสดงความคืบหน้าว่า ณ ปัจจุบันผู้ใช้มีโอกาสจะได้จับคู่กับเพื่อนร่วมห้องที่มีคุณลักษณะอย่างไร 
+  \clearpage
+  \item ระบบรายงานสรุปผล: แสดงความคืบหน้าว่า ณ ปัจจุบันผู้ใช้มีโอกาสจะได้จับคู่กับเพื่อนร่วมห้องที่มีคุณลักษณะอย่างไร 
         และจะได้ห้องแบบใด 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/resultSelectedProfile.png}
+  \includegraphics[width=\linewidth]{photo/resultSelectedProfile.png}
   \end{center}
   \caption{หน้าสรุปผล 10 อันดับสูงสุดที่มีโอกาสได้จับคู่กับผู้ใช้}
   \label{fig:select-profile}
   \end{figure}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/resultPreferenceSummary.png}
+  \includegraphics[width=\linewidth]{photo/resultPreferenceSummary.png}
   \end{center}
   \caption{หน้าสรุปผลคุณลักษณะที่ผู้ใช้ให้ความสนใจ}
   \label{fig:summary}
   \end{figure}
 
-  \item ระบบคู่มือการใช้งาน : แสดงคู่มือการใช้งานของระบบสำหรับผู้ใช้ทั่วไป ไม่รวมผู้ใช้ที่เป็นผู้ดูแลระบบ
+  \clearpage
+  \item ระบบคู่มือการใช้งาน: แสดงคู่มือการใช้งานของระบบสำหรับผู้ใช้ทั่วไป ไม่รวมผู้ใช้ที่เป็นผู้ดูแลระบบ
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/Guideline.png}
+  \includegraphics[width=\linewidth]{photo/Guideline.png}
   \end{center}
   \caption{หน้าคู่มือการใช้งาน}
   \label{fig:guideline}
   \end{figure}
 
-  \item ระบบโปรไฟล์ผู้ใช้ : ให้ผู้ใช้เข้าไปปรับแต่งคุณลักษณะของตนเองเพื่อนำไปใช้ในการจับคู่กับผู้อื่น
+  \clearpage
+  \item ระบบโปรไฟล์ผู้ใช้: ให้ผู้ใช้เข้าไปปรับแต่งคุณลักษณะของตนเองเพื่อนำไปใช้ในการจับคู่กับผู้อื่น
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/profile.png}
+  \includegraphics[width=\linewidth]{photo/profile.png}
   \end{center}
   \caption{หน้าโปรไฟล์}
   \label{fig:profile}
   \end{figure}
   
 \end{enumerate}
+
 \subsection{Administrator}
 \begin{enumerate}
-  \item ระบบจัดการเวลาเปิด-ปิดวันลงทะเบียน : ให้ผู้ดูแลระบบสามารถตั้งค่าเวลาเปิด-ปิด
+  \item ระบบจัดการเวลาเปิด--ปิดวันลงทะเบียน: ให้ผู้ดูแลระบบสามารถตั้งค่าเวลาเปิด--ปิด
   วันลงทะเบียนของผู้ใช้ทั่วไป
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/adminDashboard.png}
+  \includegraphics[width=\linewidth]{photo/adminDashboard.png}
   \end{center}
   \caption{หน้า homepage ของผู้ดูแลระบบ}
   \label{fig:dashboard}
   \end{figure}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/datepicker.png}
+  \includegraphics[width=\linewidth]{photo/datepicker.png}
   \end{center}
-  \caption{ตัวอย่างการเปลี่ยนวันที่เปิด-ปิดระบบ}
+  \caption{ตัวอย่างการเปลี่ยนวันที่เปิด--ปิดระบบ}
   \label{fig:datepicker}
   \end{figure}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/timepicker.png}
+  \includegraphics[width=\linewidth]{photo/timepicker.png}
   \end{center}
-  \caption{ตัวอย่างการเปลี่ยนเวลาที่เปิด-ปิดระบบ}
+  \caption{ตัวอย่างการเปลี่ยนเวลาที่เปิด--ปิดระบบ}
   \label{fig:timepicker}
   \end{figure}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/confirmation.png}
+  \includegraphics[width=\linewidth]{photo/confirmation.png}
   \end{center}
   \caption{ตัวอย่างแจ้งเตือนเพื่อยืนยันการตั้งค่า}
   \label{fig:confirm-date-time}
   \end{figure}
 
-  \item ระบบจัดการฐานข้อมูลและการตั้งค่าหอพักที่ใช้ในการลงทะเบียน : ให้ผู้ดูแลสามารถเลือกจัดการห้องและหอที่จะเปิดให้ลงทะเบียน
+  \clearpage
+  \item ระบบจัดการฐานข้อมูลและการตั้งค่าหอพักที่ใช้ในการลงทะเบียน: ให้ผู้ดูแลสามารถเลือกจัดการห้องและหอที่จะเปิดให้ลงทะเบียน\CIreply{ตรงนี้ต้องให้ผู้จัดการหอพักเข้ามาทำไหม}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/dormmgmt.png}
+  \includegraphics[width=\linewidth]{photo/dormmgmt.png}
   \end{center}
   \caption{หน้าการจัดการหอพักของระบบจอง}
   \label{fig:mgmt}
   \end{figure}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/dormadd.png}
+  \includegraphics[width=\linewidth]{photo/dormadd.png}
   \end{center}
   \caption{หน้าการเพิ่มหอพักในระบบลงทะเบียน}
   \label{fig:add-dorm}
   \end{figure}
+  \CIreply{เพิ่มห้องในแต่ละหออย่างไร}
   
-  \item ระบบจัดการไฟล์ที่ใช้ในการจัดการระบบลงทะเบียน : ให้ผู้ดูแลระบบสามารถเข้ามาดาวน์โหลดไฟล์ที่ใช้ในการจัดการระบบฐานข้อมูล
+  \clearpage
+  \item ระบบจัดการไฟล์ที่ใช้ในการจัดการระบบลงทะเบียน: ให้ผู้ดูแลระบบสามารถเข้ามาดาวน์โหลดไฟล์ที่ใช้ในการจัดการระบบฐานข้อมูล
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=50mm,scale=0.5]{photo/format.png}
+  \includegraphics[width=\linewidth]{photo/format.png}
   \end{center}
   \caption{หน้าดาวน์โหลดไฟล์}
   \label{fig:format-db}
