@@ -27,7 +27,7 @@
 % \end{figure}
 
 \section{Software architecture}
-\CIreply{add reference to each tool}
+% \CIreply{add reference to each tool}
 เว็บแอพพลิเคชันใช้ three-tier architecture~\cite{ttarch} ในการออกแบบระบบ โดย front-end ใช้ Next.js\cite{nextjs} 
 ที่เป็น React~\cite{react} framework ส่วน back-end ใช้ Gin Gonic~\cite{gingonic} ซึ่งเป็น Go~\cite{golang} framework ติดต่อกับ Front-end 
 ด้วย GraphQL~\cite{graphql} API และฐานข้อมูลใช้ MySQL~\cite{mysql} เป็น relational database management system (RDBMS)
@@ -59,7 +59,7 @@
 \end{enumerate}
 
 \section{Features}
-\CIreply{ระบุว่าเป็น wireframes ไม่ใช่ actual UI}
+% \CIreply{ระบุว่าเป็น wireframes ไม่ใช่ actual UI}
 ต่อไปจะเป็นการอธิบายการทำงานของแต่ละระบบ และรูปภาพตัวอย่างต่อไปนี้เป็นเพียง wireframe เท่านั้นไม่ใช่ user interface จริงๆของระบบจริง
 \subsection{End-user}
 \begin{enumerate}
@@ -192,7 +192,9 @@
   \end{figure}
 
   \clearpage
-  \item ระบบจัดการฐานข้อมูลและการตั้งค่าหอพักที่ใช้ในการลงทะเบียน: ให้ผู้ดูแลสามารถเลือกจัดการห้องและหอที่จะเปิดให้ลงทะเบียน\CIreply{ตรงนี้ต้องให้ผู้จัดการหอพักเข้ามาทำไหม}
+  \item ระบบจัดการฐานข้อมูลและการตั้งค่าหอพักที่ใช้ในการลงทะเบียน: ให้ผู้ดูแลหอพักสามารถเลือกจัดการห้องและหอที่จะเปิดให้ลงทะเบียนในระบบได้
+      โดยการกดปุ่มเพิ่มเพื่อเพิ่มหอพัก กดปุ่มแก้ไขเพื่อแก้ไขจำนวนและเลขห้องที่เปิดให้ลงทะเบียนในระบบของหอนั้นๆ และกดปุ่มลบเพื่อลบหอนั้นๆออกจากระบบลงทะเบียน
+  % \CIreply{ตรงนี้ต้องให้ผู้จัดการหอพักเข้ามาทำไหม}
   \begin{figure}[h]
   \begin{center}
   \includegraphics[width=\linewidth]{photo/dormmgmt.png}
@@ -207,10 +209,19 @@
   \caption{หน้าการเพิ่มหอพักในระบบลงทะเบียน}
   \label{fig:add-dorm}
   \end{figure}
-  \CIreply{เพิ่มห้องในแต่ละหออย่างไร}
+  \begin{figure}[h]
+    \begin{center}
+    \includegraphics[width=\linewidth]{photo/roommgmt.png}
+    \end{center}
+    \caption{หน้าการจัดการเพิ่มลดห้องที่เปิดในระบบลงทะเบียน}
+    \label{fig:room-mgmt}
+    \end{figure}
+  % \CIreply{เพิ่มห้องในแต่ละหออย่างไร}
   
   \clearpage
-  \item ระบบจัดการไฟล์ที่ใช้ในการจัดการระบบลงทะเบียน: ให้ผู้ดูแลระบบสามารถเข้ามาดาวน์โหลดไฟล์ที่ใช้ในการจัดการระบบฐานข้อมูล\CIreply{ยกตัวอย่างไฟล์ที่ควรจะต้องดาวน์โหลดได้}
+  \item ระบบจัดการไฟล์ที่ใช้ในการจัดการระบบลงทะเบียน: ให้ผู้ดูแลระบบสามารถเข้ามาดาวน์โหลดไฟล์ที่ใช้ในการจัดการระบบฐานข้อมูล
+        เช่น ไฟล์รูปแบบการตั้งค่าห้องพักที่จะเปิดให้ลงทะเบียน ไฟล์รูปแบบที่ใช้ในการเพิ่มหอพักในฐานข้อมูล เป็นต้น ซึ่งไฟล์ทั้งหมดจะเป็นไฟล์สกุล .csv
+  % \CIreply{ยกตัวอย่างไฟล์ที่ควรจะต้องดาวน์โหลดได้}
   \begin{figure}[h]
   \begin{center}
   \includegraphics[width=\linewidth]{photo/format.png}
