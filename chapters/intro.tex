@@ -32,9 +32,12 @@
 
 \section{\ifenglish Objectives\else วัตถุประสงค์ของโครงงาน\fi}
 \begin{enumerate}
-    \item พัฒนาเว็บแอพพลิเคชันตาม\hyperref[subsec:uxlaws]{หลักการออกแบบ UX}
-    \item ลดกระบวนการการคำนวณของเซิร์ฟเวอร์ในวันที่ระบบเปิดให้ลงทะเบียน
-    \item จับคู่รูมเมท, หอพัก และห้องพักไม่ให้เกิด \hyperref[sec:rmp]{rogue couple}
+    \item ลดจำนวนผู้ใช้ที่ต้องการย้ายห้องหลังทำการจองแล้ว
+    \item เพื่อทดแทนระบบเดิมที่ใช้ในปัจจุบัน
+    \item เพื่อลดภาระงานของผู้ดูแลในการดูแลระบบ
+    % \item พัฒนาเว็บแอพพลิเคชันตาม\hyperref[subsec:uxlaws]{หลักการออกแบบ UX}
+    % \item ลดกระบวนการการคำนวณของเซิร์ฟเวอร์ในวันที่ระบบเปิดให้ลงทะเบียน
+    % \item จับคู่รูมเมท, หอพัก และห้องพักไม่ให้เกิด \hyperref[sec:rmp]{rogue couple}
 \end{enumerate}
 
 \section{\ifenglish Project scope\else ขอบเขตของโครงงาน\fi}
@@ -52,19 +55,22 @@
 
 \section{\ifenglish Expected outcomes\else ประโยชน์ที่ได้รับ\fi}
 \begin{enumerate}
-    \item ผู้ใช้เรียนรู้วิธีการใช้งานระบบลงทะเบียนได้เร็วขึ้นกว่าระบบที่มีอยู่เดิม
-    \item สังคมหอพักน่าอยู่ยิ่งขึ้น
-    \item ชื่อเสียงด้านงานพัฒนาคุณภาพชีวิตนักศึกษาของมหาวิทยาลัยเป็นไปในทางที่ดีมากขึ้น
+    \item ระบบถูกนำไปใช้งานได้จริง
+    \item ผู้ใช้งานขอเปลี่ยนห้องน้อยลงหลังจากระบบประมวลผลเสร็จสิ้น
+    \item ผู้ดูแลไม่ต้องกลับมาจัดการหรือแก้ไขข้อมูลในระบบบ่อยๆ
+    \item ได้แอพพลิเคชันที่มีการออกแบบที่ทันสมัย
+    \item ได้แอพพลิเคชันที่ทำงานขัดข้องน้อยลง
+    % \item ผู้ใช้เรียนรู้วิธีการใช้งานระบบลงทะเบียนได้เร็วขึ้นกว่าระบบที่มีอยู่เดิม
+    % \item สังคมหอพักน่าอยู่ยิ่งขึ้น
+    % \item ชื่อเสียงด้านงานพัฒนาคุณภาพชีวิตนักศึกษาของมหาวิทยาลัยเป็นไปในทางที่ดีมากขึ้น
 \end{enumerate}
 
 \section{\ifenglish Technology and tools\else เทคโนโลยีและเครื่องมือที่ใช้\fi}
 
-% \subsection{\ifenglish Hardware technology\else เทคโนโลยีด้านฮาร์ดแวร์\fi}
-% \begin{enumerate}
-%     \item 
-%     \item 
-%     \item 
-% \end{enumerate}
+\subsection{\ifenglish Hardware technology\else เทคโนโลยีด้านฮาร์ดแวร์\fi}
+\begin{enumerate}
+    \item Docker~\cite{dke} -- เป็น container runtime engine ที่ช่วยสร้างและรัน containers จาก Docker images
+\end{enumerate}
 
 \subsection{\ifenglish Software technology\else เทคโนโลยีด้านซอฟต์แวร์\fi}
 \begin{enumerate}
@@ -72,13 +78,14 @@
         ที่เน้นให้สามารถหาจุดที่จะทำให้เกิดข้อผิดพลาดได้ก่อนที่จะทำการรันแอพพลิเคชัน
     \item React~\cite{react} -- เป็น library ที่ใช้ในการพัฒนา front-end ของเว็บแอพพลิเคชัน
     \item Next.js\cite{nextjs} -- เป็น React Framework ที่ช่วยให้สามารถพัฒนาเว็บแอพพลิเคชันได้ง่ายยิ่งขึ้น
-    \item Gin Gonic~\cite{gingonic} -- เป็น Go Framework ที่ช่วยในการพัฒนา back-end ของเว็บแอพพลิเคชัน
+    % \item Gin Gonic~\cite{gingonic} -- เป็น Go Framework ที่ช่วยในการพัฒนา back-end ของเว็บแอพพลิเคชัน
     \item Go~\cite{golang} -- เป็นภาษาคอมพิวเตอร์ที่เข้าใจได้ง่าย และความสามารถที่เด่นในด้านการทำ concurrency
-    \item MySQL~\cite{mysql} -- เป็น relational database management system ที่มีความสามารถในการจัดการ transactions 
-        และมีความนิยมในการใช้เป็นอย่างมาก
-    \item GraphQL~\cite{graphql} --  เป็น query language application programming interface (API) ที่มีลักษณะการใช้งานคล้ายคลึงกับการเขียน query เพื่อดึงข้อมูลจาก MySQL
-    ทำให้ง่ายต่อการนำไปใช้ในการส่งข้อมูลและทำความเข้าใจ
-    \item Docker~\cite{dke} -- เป็น container runtime engine ที่ช่วยสร้างและรัน containers จาก Docker images
+    % \item MySQL~\cite{mysql} -- เป็น relational database management system ที่มีความสามารถในการจัดการ transactions 
+    %     และมีความนิยมในการใช้เป็นอย่างมาก
+    \item PostgreSQL
+    % \item GraphQL~\cite{graphql} --  เป็น query language application programming interface (API) ที่มีลักษณะการใช้งานคล้ายคลึงกับการเขียน query เพื่อดึงข้อมูลจาก MySQL
+    % ทำให้ง่ายต่อการนำไปใช้ในการส่งข้อมูลและทำความเข้าใจ
+    \item RESTful API
 \end{enumerate}
 % \CIreply{add reference and brief description to each tool; perhaps further separate into frontend/backend/etc.}
 
