@@ -26,10 +26,17 @@
 % \label{fig:walrus}
 % \end{figure}
 
-\section{Software architecture}
-เว็บแอพพลิเคชันใช้ three-tier architecture~\cite{ttarch} ในการออกแบบระบบ โดย front-end ใช้ Next.js\cite{nextjs} 
-ที่เป็น React~\cite{react} framework ส่วน back-end ใช้ Gin Gonic~\cite{gingonic} ซึ่งเป็น Go~\cite{golang} framework ติดต่อกับ Front-end 
-ด้วย GraphQL~\cite{graphql} API และฐานข้อมูลใช้ MySQL~\cite{mysql} เป็น relational database management system (RDBMS)
+\section{ภาพรวมของแอพพลิเคชัน}
+
+เว็บแอพพลิเคชันจะเป็นแบบ three-tier architecture แต่ว่าจะทำการออกแบบ และพัฒนาให้สามารถรองรับการเปลี่ยนแปลงเป็น 
+microservice ได้ โดย Front-end และ Back-end ส่วนมากจะพัฒนาด้วย Next.js และ tRPC เพื่อความสะดวกสบายในการเรียกใช้งาน API
+และใช้ typescript ให้มีประสิทธิภาพ แต่ Back-end ในส่วนของระบบจับคู่นั้นจะพัฒนาด้วย Go เพราะสามารถเขียน concurrency ได้ง่ายแต่ยังคงไว้ซึ่งประสิทธิภาพ
+ส่วนสุดท้ายคือฐานข้อมูลจะใช้ postgresql ในการจัดเก็บและติดต่อกับ Back-end ทั้ง Next.js และ Go
+
+% เว็บแอพพลิเคชันใช้ three-tier architecture~\cite{ttarch} ในการออกแบบระบบ โดย front-end ใช้ Next.js\cite{nextjs} 
+% ที่เป็น React~\cite{react} framework ส่วน back-end ใช้ Gin Gonic~\cite{gingonic} ซึ่งเป็น Go~\cite{golang} framework ติดต่อกับ Front-end 
+% ด้วย GraphQL~\cite{graphql} API และฐานข้อมูลใช้ MySQL~\cite{mysql} เป็น relational database management system (RDBMS)
+
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=2.5in]{photo/threetierarch.png}
