@@ -38,12 +38,13 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
 % ด้วย GraphQL~\cite{graphql} API และฐานข้อมูลใช้ MySQL~\cite{mysql} เป็น relational database management system (RDBMS)
 
 \begin{figure}[h]
-\begin{center}
-\includegraphics[width=2.5in]{photo.old/threetierarch.png}
-\end{center}
-\caption{three-tier architecture}
-\label{fig:three-tier}
+  \begin{center}
+    \includegraphics[width=2.5in]{photo.old/threetierarch.png}
+  \end{center}
+  \caption{three-tier architecture}
+  \label{fig:three-tier}
 \end{figure}
+\MEreply{เปลี่ยนรูปใหม่}
 
 \section{ขั้นตอนการจับคู่}
 \subsection{ระบุรายการความต้องการ}
@@ -76,7 +77,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
 \item ระบบยืนยันตัวตน: ให้ผูู้ใช้ลงทะเบียนสมัครสมาชิกและเข้าสู่ระบบเพื่อที่จะสามารถใช้งานระบบต่างๆของระบบได้ต่อไป
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\linewidth]{photo.old/homepageNoAuth.png}
+\includegraphics[width=\linewidth]{photo/student/home.png}
 \end{center}
 \caption{homepage ที่ผู้ใช้ยังไม่ได้เข้าสู่ระบบ}
 \label{fig:hp-no-auth}
@@ -84,7 +85,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/homepageLogin.png}
+  \includegraphics[width=\linewidth]{photo/student/login.png}
   \end{center}
   \caption{homepage ขณะกำลังจะเข้าสู่ระบบ}
   \label{fig:hp-login}
@@ -92,7 +93,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/homepageReg.png}
+  \includegraphics[width=\linewidth]{photo/student/register.png}
   \end{center}
   \caption{homepage ที่ผู้ใช้กำลังสมัครสมาชิก}
   \label{fig:hp-reg}
@@ -100,7 +101,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/homepageAuth.png}
+  \includegraphics[width=\linewidth]{photo/student/home-auth.png}
   \end{center}
   \caption{homepage ที่ผู้ใช้เข้าสู่ระบบแล้ว}
   \label{fig:hp-auth}
@@ -110,7 +111,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
   \item ระบบการจัดอันดับคุณลักษณะ: ให้ผู้ใช้ที่ลงชื่อเข้าใช้แล้วเลือกคุณสมบัติของห้องและเพื่อนร่วมห้องที่ต้องการ
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/Preference.png}
+  \includegraphics[width=\linewidth]{photo/student/user-profile.png}
   \end{center}
   \caption{หน้า preference ให้ผู้ใช้เลือกคุณลักษณะที่ต้องการ}
   \label{fig:preference}
@@ -122,7 +123,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
   ตัวอย่างดังรูปที่~\ref{fig:finetune}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/finetune.png}
+  \includegraphics[width=\linewidth]{photo/student/mate-pref.png}
   \end{center}
   \caption{หน้า fine tune}
   \label{fig:finetune}
@@ -133,14 +134,14 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
         และจะได้ห้องแบบใด 
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/resultSelectedProfile.png}
+  \includegraphics[width=\linewidth]{photo/student/room-pref.png}
   \end{center}
   \caption{หน้าสรุปผล 10 อันดับสูงสุดที่มีโอกาสได้จับคู่กับผู้ใช้}
   \label{fig:select-profile}
   \end{figure}
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/resultPreferenceSummary.png}
+  \includegraphics[width=\linewidth]{photo/student/pick.png}
   \end{center}
   \caption{หน้าสรุปผลคุณลักษณะที่ผู้ใช้ให้ความสนใจ}
   \label{fig:summary}
@@ -150,7 +151,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
   \item ระบบคู่มือการใช้งาน: แสดงคู่มือการใช้งานของระบบสำหรับผู้ใช้ทั่วไป ไม่รวมผู้ใช้ที่เป็นผู้ดูแลระบบ
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/Guideline.png}
+  \includegraphics[width=\linewidth]{photo/student/tutorial.png}
   \end{center}
   \caption{หน้าคู่มือการใช้งาน}
   \label{fig:guideline}
@@ -160,7 +161,7 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
   \item ระบบโปรไฟล์ผู้ใช้: ให้ผู้ใช้เข้าไปปรับแต่งคุณลักษณะของตนเองเพื่อนำไปใช้ในการจับคู่กับผู้อื่น
   \begin{figure}[h]
   \begin{center}
-  \includegraphics[width=\linewidth]{photo.old/profile.png}
+  \includegraphics[width=\linewidth]{photo/student/profile.png}
   \end{center}
   \caption{หน้าโปรไฟล์}
   \label{fig:profile}
