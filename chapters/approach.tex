@@ -1,9 +1,9 @@
 \chapter{\ifproject%
-\ifenglish Project Structure and Methodology\else โครงสร้างและขั้นตอนการทำงาน\fi
-\else%
-\ifenglish Project Structure\else โครงสร้างของโครงงาน\fi
-\fi
-}
+    \ifenglish Project Structure and Methodology\else โครงสร้างและขั้นตอนการทำงาน\fi
+  \else%
+    \ifenglish Project Structure\else โครงสร้างของโครงงาน\fi
+  \fi
+ }
 
 ในบทนี้จะกล่าวถึงหลักการ และการออกแบบระบบ
 
@@ -67,17 +67,17 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
 เนื่องจากในส่วนก่อนหน้าที่ระบุไว้ว่าปัญหาการจับคู่นี้เป็น NP-complete จึงจำเป็นที่จะต้องหาทางเลือกอื่นในการพัฒนา 
 ซึ่งในปัจจุบันสามารถแบ่งออกได้เป็น 3 แบบนั่นคือ
 \begin{enumerate}
-  \item เลือกผู้พักอาศัยก่อนเลือกห้องพัก 
-    วิธินี้จะเลือกและจัดกลุ่มของผู้พักอาศัยตามจำนวนผู้พักอาศัยใน 1 ห้องของหอพัก โดยวิธีการเลือกนั้นจะเลือกจากผู้ใช้ที่มีค่า penalty ต่อกันน้อยที่สุด
-    แล้วจากนั้นแต่ละกลุ่มจะทำการเลือกห้องพักโดย penalty คิดจากผลรวมของ penalty ที่ได้จาก $roomPref$ ของสมาชิกในกลุ่ม
-    ซึ่งวิธินี้จะทำให้นักศึกษาได้เพื่อนร่วมห้องที่ต้องการ แต่อาจจะทำให้นักศึกษาบางคนในกลุ่มไม่ได้ห้องพักตามที่ต้องการ
+  \item เลือกผู้พักอาศัยก่อนเลือกห้องพัก
+        วิธินี้จะเลือกและจัดกลุ่มของผู้พักอาศัยตามจำนวนผู้พักอาศัยใน 1 ห้องของหอพัก โดยวิธีการเลือกนั้นจะเลือกจากผู้ใช้ที่มีค่า penalty ต่อกันน้อยที่สุด
+        แล้วจากนั้นแต่ละกลุ่มจะทำการเลือกห้องพักโดย penalty คิดจากผลรวมของ penalty ที่ได้จาก $roomPref$ ของสมาชิกในกลุ่ม
+        ซึ่งวิธินี้จะทำให้นักศึกษาได้เพื่อนร่วมห้องที่ต้องการ แต่อาจจะทำให้นักศึกษาบางคนในกลุ่มไม่ได้ห้องพักตามที่ต้องการ
   \item เลือกกลุ่มของห้องพักก่อนเลือกผู้พักอาศัย
-    วิธีนี้จะเลือกและจัดกลุ่มของนักศึกษาเข้าไปในกลุ่มของห้องพักก่อน โดยในแต่ละกลุ่มของห้องจะเป็นห้องที่มีลักษณะเหมือนๆกัน
-    หลังจากนั้นจะทำการจับกลุ่มของนักศึกษาให้เข้ากับแต่ละห้องในกลุ่ม ซึ่งวิธีนี้จะทำให้นักศึกษาได้ห้องที่ใกล้เคียงความต้องการมากที่สุด 
-    แต่จะทำให้ห้องบางห้องมีนักศึกษาที่ไม่เหมาะสมที่จะจับคู่กันเกิดขึ้น
-  \item พิจารณาเลือกทั้งห้องพักและผู้พักอาศัยพร้อมๆ กัน 
-    วิธีนี้จะทำการคิด penalty ของทั้ง $roomPref$ และ $matePref$ พร้อมๆ กันโดยเอาค่า $roomPref + matePref$ เป็น penalty
-    แต่ผู้พัฒนายังไม่สามารถหาวิธีที่จะทำการเลือกลำดับนักศึกษาที่แน่นอน ในการจับคู่ผู้ร่วมอาศัยและห้องพักพร้อมๆ กัน
+        วิธีนี้จะเลือกและจัดกลุ่มของนักศึกษาเข้าไปในกลุ่มของห้องพักก่อน โดยในแต่ละกลุ่มของห้องจะเป็นห้องที่มีลักษณะเหมือนๆกัน
+        หลังจากนั้นจะทำการจับกลุ่มของนักศึกษาให้เข้ากับแต่ละห้องในกลุ่ม ซึ่งวิธีนี้จะทำให้นักศึกษาได้ห้องที่ใกล้เคียงความต้องการมากที่สุด 
+        แต่จะทำให้ห้องบางห้องมีนักศึกษาที่ไม่เหมาะสมที่จะจับคู่กันเกิดขึ้น
+  \item พิจารณาเลือกทั้งห้องพักและผู้พักอาศัยพร้อมๆ กัน
+        วิธีนี้จะทำการคิด penalty ของทั้ง $roomPref$ และ $matePref$ พร้อมๆ กันโดยเอาค่า $roomPref + matePref$ เป็น penalty
+        แต่ผู้พัฒนายังไม่สามารถหาวิธีที่จะทำการเลือกลำดับนักศึกษาที่แน่นอน ในการจับคู่ผู้ร่วมอาศัยและห้องพักพร้อมๆ กัน
 \end{enumerate}
 
 ซึ่งวิธีทั้ง 3 นั้นยังไม่สามารถยืนยันได้ว่าจะใช้แบบใด เพราะปัจจุบันยังอยู่ในขั้นตอนของการศึกษาค้นคว้าเพิ่มเติม
@@ -106,168 +106,182 @@ microservice ได้ โดย Front-end และ Back-end ส่วนมา
 \MEreply{replace with student new design}
 \subsection{นักศึกษา}
 \begin{enumerate}
-\item ระบบยืนยันตัวตน: ให้ผูู้ใช้ลงทะเบียนสมัครสมาชิกและเข้าสู่ระบบเพื่อที่จะสามารถใช้งานระบบต่างๆของระบบได้ต่อไป
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=\linewidth]{photo/student/home.png}
-\end{center}
-\caption{homepage ที่ผู้ใช้ยังไม่ได้เข้าสู่ระบบ}
-\label{fig:hp-no-auth}
-\end{figure}
-
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/login.png}
-  \end{center}
-  \caption{homepage ขณะกำลังจะเข้าสู่ระบบ}
-  \label{fig:hp-login}
-  \end{figure}
-
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/register.png}
-  \end{center}
-  \caption{homepage ที่ผู้ใช้กำลังสมัครสมาชิก}
-  \label{fig:hp-reg}
-  \end{figure}
-
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/home-auth.png}
-  \end{center}
-  \caption{homepage ที่ผู้ใช้เข้าสู่ระบบแล้ว}
-  \label{fig:hp-auth}
-  \end{figure}
-
-  \clearpage
-  \item ระบบการจัดอันดับคุณลักษณะ: ให้ผู้ใช้ที่ลงชื่อเข้าใช้แล้วเลือกคุณสมบัติของห้องและเพื่อนร่วมห้องที่ต้องการ
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/user-profile.png}
-  \end{center}
-  \caption{หน้า preference ให้ผู้ใช้เลือกคุณลักษณะที่ต้องการ}
-  \label{fig:preference}
-  \end{figure}
-  
-  \clearpage
-  \item ระบบปรับจูนคุณลักษณะ: ระบบจะทำการนำโปรไฟล์ของบุคคลอื่นๆ มาแสดงให้ผู้ใช้เลือกว่า หากเป็นบุคคลที่มี
-  คุณลักษณะตามโปรไฟล์ ผู้ใช้จะเลือกบุคคลดังกล่าวเป็นเพื่อนร่วมห้องหรือไม่ เพื่อคำนวณหาระดับความใส่ใจในคุณลักษณะต่างๆของผู้ใช้ 
-  ตัวอย่างดังรูปที่~\ref{fig:finetune}
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/mate-pref.png}
-  \end{center}
-  \caption{หน้า fine tune}
-  \label{fig:finetune}
-  \end{figure}
-
-  \clearpage
-  \item ระบบรายงานสรุปผล: แสดงความคืบหน้าว่า ณ ปัจจุบันผู้ใช้มีโอกาสจะได้จับคู่กับเพื่อนร่วมห้องที่มีคุณลักษณะอย่างไร 
-        และจะได้ห้องแบบใด 
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/room-pref.png}
-  \end{center}
-  \caption{หน้าสรุปผล 10 อันดับสูงสุดที่มีโอกาสได้จับคู่กับผู้ใช้}
-  \label{fig:select-profile}
-  \end{figure}
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/pick.png}
-  \end{center}
-  \caption{หน้าสรุปผลคุณลักษณะที่ผู้ใช้ให้ความสนใจ}
-  \label{fig:summary}
-  \end{figure}
-
-  \clearpage
-  \item ระบบคู่มือการใช้งาน: แสดงคู่มือการใช้งานของระบบสำหรับผู้ใช้ทั่วไป ไม่รวมผู้ใช้ที่เป็นผู้ดูแลระบบ
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/tutorial.png}
-  \end{center}
-  \caption{หน้าคู่มือการใช้งาน}
-  \label{fig:guideline}
-  \end{figure}
-
-  \clearpage
-  \item ระบบโปรไฟล์ผู้ใช้: ให้ผู้ใช้เข้าไปปรับแต่งคุณลักษณะของตนเองเพื่อนำไปใช้ในการจับคู่กับผู้อื่น
-  \begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=\linewidth]{photo/student/profile.png}
-  \end{center}
-  \caption{หน้าโปรไฟล์}
-  \label{fig:profile}
-  \end{figure}
-  
+  \item นักศึกษาเข้าสู่หน้าต้อนรับของแอพพลิเคชัน แต่ยังไม่สามารถทำอะไรได้ ต้องทำการยืนยันตัวตนด้วยการคลิกปุ่ม login หรือ quick start ก่อน
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/home.png}
+          \end{center}
+          \caption{หน้าต้อนรับที่ไม่ได้ยืนยันตัวตน}
+          \label{fig:homepage}
+        \end{figure}
+        \clearpage
+  \item นักศึกษายืนยันตัวตน โดยหน้าต่างล็อคอิน ซึ่งสามารถสร้างบัญชีใหม่ได้หากยังไม่มีบัญชี ดังรูปตัวอย่าง
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/login.png}
+          \end{center}
+          \caption{หน้าต่างล็อคอิน}
+          \label{fig:login}
+        \end{figure}
+        
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/register.png}
+          \end{center}
+          \caption{หน้าต่างลงทะเบียน}
+          \label{fig:register}
+        \end{figure}
+        
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/home-auth.png}
+          \end{center}
+          \caption{หน้าต้อนรับหลังจากการยืนยันตัวตน}
+          \label{fig:homepage-auth}
+        \end{figure}
+        \clearpage
+  \item นักศึกษาเรียนรู้การทำงานด้วยหน้าต่างคู่มือการใช้งาน ซึ่งจะมีแผนผังที่สามารถมีปฏิสัมพันธ์ในการช่วยแนะนำแอพพลิเคชัน
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/tutorial.png}
+          \end{center}
+          \caption{หน้าคู่มือการใช้งาน}
+          \label{fig:tutorial}
+        \end{figure}
+        \clearpage
+  \item นักศึกษาเริ่มต้นใช้งานจะพบกับหน้าระบุคุณลักษณะของตนเอง
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/user-profile.png}
+          \end{center}
+          \caption{หน้าระบุ $profile$ ของนักศึกษา}
+          \label{fig:user-profile}
+        \end{figure}
+        \clearpage
+  \item นักศึกษาระบุคุณลักษณะของผู้ร่วมอาศัยที่ต้องการ
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/mate-pref.png}
+          \end{center}
+          \caption{หน้าระบุ $matePref$ ของนักศึกษา}
+          \label{fig:mate-pref}
+        \end{figure}
+        \clearpage
+  \item นักศึกษาระบุห้องและหอพักที่ต้องการ
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/room-pref.png}
+          \end{center}
+          \caption{หน้าระบุ $roomPref$ และ $dormPref$ ของนักศึกษา}
+          \label{fig:room-pref}
+        \end{figure}
+        \clearpage
+  \item นักศึกษาตรวจสอบคุณลักษณะของตนเอง และสามารถแก้ไขหากมีข้อผิดพลาดได้ด้วยปุ่ม edit
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/profile.png}
+          \end{center}
+          \caption{หน้าโปรไฟล์}
+          \label{fig:profile}
+        \end{figure}
+        \clearpage
+  \item นักศึกษาตรวจสอบคุณลักษณะของผู้ร่วมอาศัยที่คาดว่าจะได้รับหลังจากระบบสิ้นสุดการประมวลผล
+        \begin{figure}[h]
+          \begin{center}
+            \includegraphics[width=\linewidth]{photo/student/pick.png}
+          \end{center}
+          \caption{หน้าสรุปผลคุณลักษณะที่ผู้ใช้ให้ความสนใจ}
+          \label{fig:summary}
+        \end{figure}
+        % \item ระบบยืนยันตัวตน: ให้ผูู้ใช้ลงทะเบียนสมัครสมาชิกและเข้าสู่ระบบเพื่อที่จะสามารถใช้งานระบบต่างๆของระบบได้ต่อไป
+        % \item ระบบการจัดอันดับคุณลักษณะ: ให้ผู้ใช้ที่ลงชื่อเข้าใช้แล้วเลือกคุณสมบัติของห้องและเพื่อนร่วมห้องที่ต้องการ
+        % \item ระบบปรับจูนคุณลักษณะ: ระบบจะทำการนำโปรไฟล์ของบุคคลอื่นๆ มาแสดงให้ผู้ใช้เลือกว่า หากเป็นบุคคลที่มี
+        %       คุณลักษณะตามโปรไฟล์ ผู้ใช้จะเลือกบุคคลดังกล่าวเป็นเพื่อนร่วมห้องหรือไม่ เพื่อคำนวณหาระดับความใส่ใจในคุณลักษณะต่างๆของผู้ใช้ 
+        %       ตัวอย่างดังรูปที่~\ref{fig:finetune}
+        % \item ระบบรายงานสรุปผล: แสดงความคืบหน้าว่า ณ ปัจจุบันผู้ใช้มีโอกาสจะได้จับคู่กับเพื่อนร่วมห้องที่มีคุณลักษณะอย่างไร
+        %       และจะได้ห้องแบบใด 
+        % \item ระบบคู่มือการใช้งาน: แสดงคู่มือการใช้งานของระบบสำหรับผู้ใช้ทั่วไป ไม่รวมผู้ใช้ที่เป็นผู้ดูแลระบบ
+        % \item ระบบโปรไฟล์ผู้ใช้: ให้ผู้ใช้เข้าไปปรับแต่งคุณลักษณะของตนเองเพื่อนำไปใช้ในการจับคู่กับผู้อื่น
+        
+        
+        
+        
+        
+        
+        
 \end{enumerate}
 
 \subsection{ผู้ดูแล}
+ส่วนของผู้ดูแลนั้นยังไม่มีการออกแบบ แต่เบื้องต้นคาดว่าจะเป็นแบบ dashboard 1 หน้าดังรูป\ME{...}{ใส่รูปตัวอย่าง dashboard} ที่สามารถบริหารจัดการสิ่งต่างๆ ต่อไปนี้
 \begin{enumerate}
-  \item ระบบจัดการเวลาเปิด--ปิดวันลงทะเบียน: ให้ผู้ดูแลระบบสามารถตั้งค่าเวลาเปิด--ปิด
-  วันลงทะเบียนของผู้ใช้ทั่วไป
-  % \begin{figure}[h]
-  % \begin{center}
-  % \includegraphics[width=\linewidth]{photo.old/adminDashboard.png}
-  % \end{center}
-  % \caption{หน้า homepage ของผู้ดูแลระบบ}
-  % \label{fig:dashboard}
-  % \end{figure}
-  % \begin{figure}[h]
-  % \begin{center}
-  % \includegraphics[width=\linewidth]{photo.old/datepicker.png}
-  % \end{center}
-  % \caption{ตัวอย่างการเปลี่ยนวันที่เปิด--ปิดระบบ}
-  % \label{fig:datepicker}
-  % \end{figure}
-  % \begin{figure}[h]
-  % \begin{center}
-  % \includegraphics[width=\linewidth]{photo.old/timepicker.png}
-  % \end{center}
-  % \caption{ตัวอย่างการเปลี่ยนเวลาที่เปิด--ปิดระบบ}
-  % \label{fig:timepicker}
-  % \end{figure}
-  % \begin{figure}[h]
-  % \begin{center}
-  % \includegraphics[width=\linewidth]{photo.old/confirmation.png}
-  % \end{center}
-  % \caption{ตัวอย่างแจ้งเตือนเพื่อยืนยันการตั้งค่า}
-  % \label{fig:confirm-date-time}
-  % \end{figure}
-
-  \clearpage
-  \item ระบบจัดการฐานข้อมูลและการตั้งค่าหอพักที่ใช้ในการลงทะเบียน: ให้ผู้ดูแลหอพักสามารถเลือกจัดการห้องและหอที่จะเปิดให้ลงทะเบียนในระบบได้
-      โดยการกดปุ่มเพิ่มเพื่อเพิ่มหอพัก กดปุ่มแก้ไขเพื่อแก้ไขจำนวนและเลขห้องที่เปิดให้ลงทะเบียนในระบบของหอนั้นๆ และกดปุ่มลบเพื่อลบหอนั้นๆออกจากระบบลงทะเบียน
-  % \begin{figure}[h]
-  % \begin{center}
-  % \includegraphics[width=\linewidth]{photo.old/dormmgmt.png}
-  % \end{center}
-  % \caption{หน้าการจัดการหอพักของระบบจอง}
-  % \label{fig:mgmt}
-  % \end{figure}
-  % \begin{figure}[h]
-  % \begin{center}
-  % \includegraphics[width=\linewidth]{photo.old/dormadd.png}
-  % \end{center}
-  % \caption{หน้าการเพิ่มหอพักในระบบลงทะเบียน}
-  % \label{fig:add-dorm}
-  % \end{figure}
-  % \begin{figure}[h]
-  %   \begin{center}
-  %   \includegraphics[width=\linewidth]{photo.old/roommgmt.png}
-  %   \end{center}
-  %   \caption{หน้าการจัดการเพิ่มลดห้องที่เปิดในระบบลงทะเบียน}
-  %   \label{fig:room-mgmt}
-  %   \end{figure}
-  
-  \clearpage
-  \item ระบบศูนย์รวมไฟล์แม่แบบของระบบลงทะเบียน: ให้ผู้ดูแลระบบสามารถเข้ามาดาวน์โหลดไฟล์แม่แบบที่ต้องใช้ในการจัดการระบบฐานข้อมูล\CIreply{mention template}
-        ยกตัวอย่างเช่น ไฟล์แม่แบบการตั้งค่าห้องพักที่จะเปิดให้ลงทะเบียน ภายในไฟล์จะมีฟอร์มที่มีหัวข้อที่ต้องกรอกจัดเตรียมไว้ให้แล้ว ซึ่งไฟล์ทั้งหมดจะเป็นไฟล์สกุล .csv
-  % \CIreply{ดาวน์โหลดไฟล์พวกนี้ไปเพื่ออะไร?}
-  % \begin{figure}[h]
-  % \begin{center}
-  % \includegraphics[width=\linewidth]{photo.old/format.png}
-  % \end{center}
-  % \caption{หน้าดาวน์โหลดไฟล์}
-  % \label{fig:format-db}
-  % \end{figure}
+  \item ผู้ดูแลเพิ่มลด และแก้ไขข้อมูลของหอพัก เพื่อนำข้อมูลไปใช้ในการระบุห้องที่เปิดให้จองในระบบ
+  \item ผู้ดูแลระบุรายการห้องพักที่ไม่เปิดให้จอง โดยใช้รูปแบบ และประเภทไฟล์ที่ระบบกำหนดเบื้องต้นคาดว่าให้ผู้ดูแลระบุเป็นรายการในการจัดการห้อง
+  \item ผู้ดูแลตั้งค่าวันที่เปิด--ปิดระบบ โดยผู้ดูแลสามารถตั้งค่าได้ด้วยหน้าต่างใช้งาน หรืออาจใช้ไฟล์ที่ระบุห้องพักระบุวันเปิด--ปิดเช่นกัน
+        % \item ระบบจัดการเวลาเปิด--ปิดวันลงทะเบียน: ให้ผู้ดูแลระบบสามารถตั้งค่าเวลาเปิด--ปิด
+        % วันลงทะเบียนของผู้ใช้ทั่วไป
+        % \item ระบบจัดการฐานข้อมูลและการตั้งค่าหอพักที่ใช้ในการลงทะเบียน: ให้ผู้ดูแลหอพักสามารถเลือกจัดการห้องและหอที่จะเปิดให้ลงทะเบียนในระบบได้
+        % โดยการกดปุ่มเพิ่มเพื่อเพิ่มหอพัก กดปุ่มแก้ไขเพื่อแก้ไขจำนวนและเลขห้องที่เปิดให้ลงทะเบียนในระบบของหอนั้นๆ และกดปุ่มลบเพื่อลบหอนั้นๆออกจากระบบลงทะเบียน
+        % \item ระบบศูนย์รวมไฟล์แม่แบบของระบบลงทะเบียน: ให้ผู้ดูแลระบบสามารถเข้ามาดาวน์โหลดไฟล์แม่แบบที่ต้องใช้ในการจัดการระบบฐานข้อมูล\CIreply{mention template}
+        % ยกตัวอย่างเช่น ไฟล์แม่แบบการตั้งค่าห้องพักที่จะเปิดให้ลงทะเบียน ภายในไฟล์จะมีฟอร์มที่มีหัวข้อที่ต้องกรอกจัดเตรียมไว้ให้แล้ว ซึ่งไฟล์ทั้งหมดจะเป็นไฟล์สกุล .csv
+        % \begin{figure}[h]
+        % \begin{center}
+        % \includegraphics[width=\linewidth]{photo.old/adminDashboard.png}
+        % \end{center}
+        % \caption{หน้า homepage ของผู้ดูแลระบบ}
+        % \label{fig:dashboard}
+        % \end{figure}
+        % \begin{figure}[h]
+        % \begin{center}
+        % \includegraphics[width=\linewidth]{photo.old/datepicker.png}
+        % \end{center}
+        % \caption{ตัวอย่างการเปลี่ยนวันที่เปิด--ปิดระบบ}
+        % \label{fig:datepicker}
+        % \end{figure}
+        % \begin{figure}[h]
+        % \begin{center}
+        % \includegraphics[width=\linewidth]{photo.old/timepicker.png}
+        % \end{center}
+        % \caption{ตัวอย่างการเปลี่ยนเวลาที่เปิด--ปิดระบบ}
+        % \label{fig:timepicker}
+        % \end{figure}
+        % \begin{figure}[h]
+        % \begin{center}
+        % \includegraphics[width=\linewidth]{photo.old/confirmation.png}
+        % \end{center}
+        % \caption{ตัวอย่างแจ้งเตือนเพื่อยืนยันการตั้งค่า}
+        % \label{fig:confirm-date-time}
+        % \end{figure}
+        
+        % \clearpage
+        % \begin{figure}[h]
+        % \begin{center}
+        % \includegraphics[width=\linewidth]{photo.old/dormmgmt.png}
+        % \end{center}
+        % \caption{หน้าการจัดการหอพักของระบบจอง}
+        % \label{fig:mgmt}
+        % \end{figure}
+        % \begin{figure}[h]
+        % \begin{center}
+        % \includegraphics[width=\linewidth]{photo.old/dormadd.png}
+        % \end{center}
+        % \caption{หน้าการเพิ่มหอพักในระบบลงทะเบียน}
+        % \label{fig:add-dorm}
+        % \end{figure}
+        % \begin{figure}[h]
+        %   \begin{center}
+        %   \includegraphics[width=\linewidth]{photo.old/roommgmt.png}
+        %   \end{center}
+        %   \caption{หน้าการจัดการเพิ่มลดห้องที่เปิดในระบบลงทะเบียน}
+        %   \label{fig:room-mgmt}
+        %   \end{figure}
+        
+        % \clearpage
+        % \CIreply{ดาวน์โหลดไฟล์พวกนี้ไปเพื่ออะไร?}
+        % \begin{figure}[h]
+        % \begin{center}
+        % \includegraphics[width=\linewidth]{photo.old/format.png}
+        % \end{center}
+        % \caption{หน้าดาวน์โหลดไฟล์}
+        % \label{fig:format-db}
+        % \end{figure}
 \end{enumerate}
