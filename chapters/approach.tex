@@ -33,16 +33,16 @@
 % และใช้ typescript ให้มีประสิทธิภาพ แต่ Back-end ในส่วนของระบบจับคู่นั้นจะพัฒนาด้วย Go เพราะสามารถเขียน concurrency ได้ง่ายแต่ยังคงไว้ซึ่งประสิทธิภาพ
 % ส่วนสุดท้ายคือฐานข้อมูลจะใช้ postgresql ในการจัดเก็บและติดต่อกับ Back-end ทั้ง Next.js และ Go
 
-เว็บแอพพลิเคชันจะเป็นแบบ three-tier architecture แต่จะทำการออกแบบ และพัฒนาให้สามารถรองรับการเปลี่ยนแปลงเป็น microservice ได้ โดย frontend 
-และ backend จะพัฒนาด้วย Next.js ,TypeScript และ tRPC ซึ่งมีส่วนช่วยให้การพัฒนามีความถูกต้องจากตัวแปรของทั้ง backend และ frontend เพราะอัลกอริทึมมีอินพุตที่ต้องการเป็นจำนวนมาก
-และมีหลายส่วนย่อยเมื่อมีการเรียกใช้งานข้ามไปมา ถ้าไม่มีการจำกัดประเภทตัวแปรที่ต้องส่งจะทำให้เกิดข้อผิดพลาดเป็นจำนวนมาก
+เว็บแอพพลิเคชันจะเป็นแบบ three-tier architecture แต่จะทำการออกแบบ และพัฒนาให้สามารถรองรับการเปลี่ยนแปลงเป็น microservice ได้โดย 
+frontend และ backend จะพัฒนาด้วย Next.js ,TypeScript และ tRPC ซึ่งมีส่วนช่วยให้การพัฒนามีความถูกต้องจากตัวแปรของทั้ง backend และ 
+frontend เพราะอัลกอริทึมมีอินพุตที่ต้องการเป็นจำนวนมาก และมีหลายส่วนย่อยเมื่อมีการเรียกใช้งานข้ามไปมา ถ้าไม่มีการจำกัดประเภทตัวแปรที่ต้องส่งจะทำให้เกิดข้อผิดพลาดเป็นจำนวนมาก
 ส่วนสุดท้ายคือฐานข้อมูลจะใช้ PostgreSQL ในการจัดเก็บและติดต่อกับ backend
 
 % เว็บแอพพลิเคชันใช้ three-tier architecture~\cite{ttarch} ในการออกแบบระบบ โดย front-end ใช้ Next.js\cite{nextjs} 
 % ที่เป็น React~\cite{react} framework ส่วน back-end ใช้ Gin Gonic~\cite{gingonic} ซึ่งเป็น Go~\cite{golang} framework ติดต่อกับ Front-end 
 % ด้วย GraphQL~\cite{graphql} API และฐานข้อมูลใช้ MySQL~\cite{mysql} เป็น relational database management system (RDBMS)
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
     \includegraphics[width=2.5in]{photo/diagram/app-arch.jpeg}
   \end{center}
@@ -60,7 +60,7 @@
   \item matching: การจับคู่จะพิจารณาจากข้อมูลที่ได้ในขั้นตอนที่ $1$ และ $2$
 \end{enumerate}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
     \includegraphics[width=2.5in]{photo/diagram/matching-flow.jpeg}
   \end{center}
@@ -98,7 +98,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
 ซึ่งจะหมายความว่าการที่ messiness เพิ่มไป 2 นั้นทำให้เจ้าของไม่พึงพอใจมากกว่าการที่ loudness เพิ่มไป 3 กล่าวคือ messiness นั้นมี weight ที่มากกว่า loudness
 ดังนั้นอัลกอริทึมจะต้องทำการปรับ weight ของ loudness ลง
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
     \includegraphics[width=2.5in]{photo/diagram/weight_adjustment.png}
   \end{center}
@@ -107,13 +107,22 @@ $matePref$ และ tolerances ของเจ้าของในการส
 \end{figure}
 
 \subsubsection{วิธีการคำนวณ penalty}
-ในการคำนวณค่า penalty นั้นจำเป็นต้องใช้ข้อมูล 2 ส่วนนั่นคือค่า $w_{attr}$ และ $\Delta attr$ โดย
+หลังจากทราบ weight ที่ต้องการปรับลดแล้วการที่จะทราบได้ว่า weight จะลดไปประมาณไหนนั้นต้องมีค่าใช้เปรียบเทียบซึ่งในที่นี้จะใช้ penalty
+ซึ่งค่า penalty คือค่าที่ใช้บ่งบอกว่า โปรไฟล์รูมเมทคนดังกล่าวนั้นมีความเหมาะสมกับ preference ที่พิจารณามากน้อยเพียงใด
+โดยค่า penalty มีอยู่ทั้งสิ้น 2 แบบคือ
 \begin{enumerate}
-  \item $w_{attr}$ คือ weight ของคุณลักษณะที่สนใจ $attr$
+  \item $penalty_{attr}$ คือค่าความเหมาะสมของคุณลักษณะหนึ่งๆ $attr$ เช่น $messiness$ $loudness$ ระหว่างโปรไฟล์กับ preference ซึ่งจะใช้ในการปรับค่า $weight_{attr}$
+  \item $penalty_{all}$ คือค่ารวมของ $penalty_{attr}$ ทั้งหมดซึ่งจะนำไปใช้คิดหาความเหมาะสมของทั้งโปรไฟล์ในการจับคู่
+\end{enumerate}
+
+ในการคำนวณค่า $penalty_{attr}$ นั้นจำเป็นต้องใช้ข้อมูล 2 ส่วนนั่นคือค่า $weight_{attr}$ และ $\Delta attr$ โดย
+\begin{enumerate}
+  \item $weight_{attr}$ คือ weight ของคุณลักษณะที่สนใจ $attr$
   \item $\Delta attr$ คือส่วนต่างระหว่างค่าคุณลักษณะของโปรไฟล์รูมเมท $attr_{profile}$ 
   กับค่าคุณลักษณะของรูมเมทที่เราสนใจ $attr_{roomPref}$ 
 \end{enumerate}
-ซึ่งค่า weight จะเป็นค่าที่บ่งบอกระดับความสำคัญของคุณลักษณะนั้นๆ ว่าสำคัญมากน้อยเพียงใด ซึ่งค่านี้จะต่างออกไปตามแต่ละบุคคล
+ซึ่งการจะปรับ $weight_{attr}$ นั้นต้องอ้างอิงจากข้อจำกัดที่ว่าค่า penalty ของ weight ที่ต้องปรับลดหรือ $penalty_{attr-picked}$ 
+จะต้องไม่มากไปกว่าค่า penalty ของ weight ที่ถูกเปรีบเทียบด้วยหรือ $penalty_{attr-compare}$
 
 \subsubsection{การหาค่า weight} 
 โดยค่า weight นั้นจะได้จากการ
@@ -174,7 +183,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
 \subsection{นักศึกษา}
 \begin{enumerate}
   \item นักศึกษาเข้าสู่หน้าต้อนรับของแอพพลิเคชัน แต่ยังไม่สามารถทำอะไรได้ ต้องทำการยืนยันตัวตนด้วยการคลิกปุ่ม login หรือ quick start ก่อน
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/home.png}
           \end{center}
@@ -183,7 +192,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
         \end{figure}
         \clearpage
   \item นักศึกษายืนยันตัวตน โดยหน้าต่างล็อคอิน ซึ่งสามารถสร้างบัญชีใหม่ได้หากยังไม่มีบัญชี ดังรูปตัวอย่าง
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/login.png}
           \end{center}
@@ -199,7 +208,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
           \label{fig:register}
         \end{figure}
         
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/home-auth.png}
           \end{center}
@@ -207,8 +216,9 @@ $matePref$ และ tolerances ของเจ้าของในการส
           \label{fig:homepage-auth}
         \end{figure}
         \clearpage
-  \item นักศึกษาเรียนรู้การทำงานด้วยหน้าต่างคู่มือการใช้งาน ซึ่งจะมีแผนผังที่สามารถมีปฏิสัมพันธ์ในการช่วยแนะนำแอพพลิเคชัน
-        \begin{figure}[h]
+  \item นักศึกษาเรียนรู้การทำงานด้วยหน้าต่างคู่มือการใช้งาน ซึ่งจะมีแผนผังที่สามารถมีปฏิสัมพันธ์ในการ-
+  ช่วยแนะนำแอพพลิเคชัน
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/tutorial.png}
           \end{center}
@@ -217,7 +227,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
         \end{figure}
         \clearpage
   \item นักศึกษาเริ่มต้นใช้งานจะพบกับหน้าระบุคุณลักษณะของตนเอง
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/user-profile.png}
           \end{center}
@@ -226,7 +236,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
         \end{figure}
         \clearpage
   \item นักศึกษาระบุคุณลักษณะของผู้ร่วมอาศัยที่ต้องการ
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/mate-pref.png}
           \end{center}
@@ -235,7 +245,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
         \end{figure}
         \clearpage
   \item นักศึกษาระบุห้องและหอพักที่ต้องการ
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/room-pref.png}
           \end{center}
@@ -244,7 +254,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
         \end{figure}
         \clearpage
   \item นักศึกษาตรวจสอบคุณลักษณะของตนเอง และสามารถแก้ไขหากมีข้อผิดพลาดได้ด้วยปุ่ม edit
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/profile.png}
           \end{center}
@@ -253,7 +263,7 @@ $matePref$ และ tolerances ของเจ้าของในการส
         \end{figure}
         \clearpage
   \item นักศึกษาตรวจสอบคุณลักษณะของผู้ร่วมอาศัยที่คาดว่าจะได้รับหลังจากระบบสิ้นสุดการประมวลผล
-        \begin{figure}[h]
+        \begin{figure}[ht]
           \begin{center}
             \includegraphics[width=\linewidth]{photo/student/summary.png}
           \end{center}
