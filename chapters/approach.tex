@@ -122,11 +122,13 @@ $matePref$ และ tolerances ของเจ้าของในการส
   กับค่าคุณลักษณะของรูมเมทที่เราสนใจ $attr_{roomPref}$ 
 \end{enumerate}
 ซึ่งการจะปรับ $weight_{attr}$ นั้นต้องอ้างอิงจากข้อจำกัดที่ว่าค่า penalty ของ weight ที่ต้องปรับลดเรียกว่า
-$penalty'_{attr-picked}$ จะต้องน้อยกว่าค่า penalty ของ weight ที่ถูกเปรีบเทียบด้วยเรียกว่า
+$penalty'_{attr-picked}$ จะต้องมากกว่าค่า penalty ของ weight ที่ถูกเปรีบเทียบด้วยเรียกว่า
 $penalty_{attr-compare}$ ซึ่งก็คือสมการ
 \begin{equation}
-  penalty_{attr-compare} < penalty'_{attr-picked}
+  penalty_{attr-compare} > penalty'_{attr-picked}
 \end{equation}
+และ $weight'_{attr-picked}$ จะต้องทำให้ค่า $penalty'_{attr-picked}$ มีค่าไม่น้อยไปกว่า $penalty_{attr-picked}$
+ดังสมการ
 \begin{equation}
   boundary_{min} = penalty_{attr-compare}/(\Delta attr_{picked} + 1) 
 \end{equation}
@@ -144,14 +146,32 @@ $penalty_{attr-compare}$ ซึ่งก็คือสมการ
 \subsubsection{การนอมัลไลเซชัน weights} 
 เนื่องจากค่า weights นั้นเป็นเหมือนกับ vector การแทนค่า $weight'_{attr-picked}$ สับเปลี่ยนกันไปตามแต่ละคุณลักษณะซ้ำๆ 
 จะทำให้ vector ของ weigths นั้นไม่ใช่ vector 1 หน่วยหรือก็คือความหมายของ weight แต่ละค่านั้นไม่สมจริงต้องทำการนอมัลไลเซชัน
-เพื่อให้ weights คำนวณได้ง่าย
+เพื่อให้ weights คำนวณได้ง่าย ซึ่งจะใช้ L2 นอมัลไลเซชันในการคำนวณซึ่งจะเป็นดังสมการ
+\begin{equation}
+  weights = [weight_{messiness}, weight_{loudness}, weight_{do-not-disturb}]
+\end{equation}
+\begin{equation}
+  magnitude = \sqrt{weight_{messiness}^2 + weight_{loudness}^2 + weight_{do-not-disturb}^2}
+\end{equation}
+\begin{equation}
+  weights_{norm} = weights / magnitude
+\end{equation}
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \begin{center}
     \includegraphics[width=2.5in]{photo/diagram/weight_norm.jpeg}
   \end{center}
   \caption{ตัวอย่างการนอมัลไลเซชัน}
   \label{fig:weight-norm}
+\end{figure}
+
+หลังจากได้ $weights_{norm}$ เสร็จแล้วจะสามารถทำการปรับน้ำหนักซ้ำๆ ได้จนกว่าเจ้าของโปรไฟล์จะพอใจ
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=2.5in]{photo/diagram/finetune_flow.png}
+  \end{center}
+  \caption{ตัวอย่างการปรับค่า weights}
+  \label{fig:finetune-flow}
 \end{figure}
 
 \subsection{วิธีตัดสินในการจับคู่ตามความต้องการ}
