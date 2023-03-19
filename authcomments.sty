@@ -117,7 +117,7 @@
      
 \else
    \newcommand\newcommenter[2]{
-        \expandafter\def\csname#1\endcsname##1{\ignorespaces}
+        \expandafter\def\csname#1\endcsname##1##2{##1}
         \expandafter\def\csname#1reply\endcsname##1{\ignorespaces}
     }
 \fi
