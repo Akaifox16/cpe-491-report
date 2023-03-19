@@ -78,7 +78,15 @@ frontend เพราะอัลกอริทึมมีอินพุต�
 เนื่องจากอัลกอริทึมนี้ตั้งสมมุติฐานไว้ว่าผู้ใช้นั้นไม่ได้รู้ถึงความต้องการที่แน่ชัดของตนเอง เช่น 
 นาย ก บอกว่าอยากได้รูมเมทที่มีการรักษาความสะอาดระดับ 4 ซึ่งจริงๆแล้ว อาจจะยอมรับระดับ 5 ได้ หรืออาจจะไม่ยอมรับรูมเมทที่รักษาความสะอาดมากกว่าตัวเองเช่นระดับ 1
 โดยวิธีการให้ผู้ใช้เลือกโปรไฟล์ที่มีการปรับค่าคุณลักษณะแล้วให้เจ้าของ preference เลือกว่าโปรไฟล์ไหนที่ต้องการบ้างด้วยเช่นเจ้าของ preference ระบุว่าต้องการ $messiness$ เท่ากับ 5
-อัลกอริทึมจะสร้างโปรไฟล์ที่ $messiness$ มีค่า 7 มาให้เลือกซึ่งถ้าโปรไฟล์ถูกไม่ถูกเลือก จะสร้าโปรไฟล์ที่ $messiness$ มีค่าเท่ากับ 6 มาให้ถ้าโปรไฟล์นั้นถูกเลือกก็จะได้ว่ามีค่า $tolerant_{max}$ เท่ากับ 6 \MEreply{not finished yet}
+อัลกอริทึมจะสร้างโปรไฟล์ที่ $messiness$ มีค่า 7 มาให้เลือกซึ่งถ้าโปรไฟล์ไม่ถูกเลือกจะสร้างโปรไฟล์ที่ $messiness$ มีค่าเท่ากับ 6 มาให้ ถ้าโปรไฟล์นั้นถูกเลือกก็จะได้ว่ามีค่า $tolerant_{max}$ เท่ากับ 6
+ซึ่งจริงๆ แล้วก็คือการปรับโดยใช้ binary search ดังรูปตัวอย่างที่ \ref{fig:tolerance-binary}
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{photo/diagram/binary_tolerance.jpeg}
+  \end{center}
+  \caption{ตัวอย่างการหา $\mathit{tolerance_\mathit{max}}$}
+  \label{fig:tolerance-binary}
+\end{figure}
 
 \subsection{คำนวณน้ำหนักความสนใจของแต่ละคุณลักษณะของรูมเมท}
 เพราะผู้ใช้แต่ละคนนั้นมีความสนใจที่แตกต่างกัน บางคนอาจจะสนใจระดับเสียงที่ใช้ในห้องพักมากที่สุด บางคนอาจจะสนใจระดับความสะอาดของรูมเมทมากที่สุด 
@@ -128,7 +136,74 @@ $\mathit{penalty'}_\mathit{attr\_unpicked}$) ซึ่งก็คืออส�
   \mathit{penalty'}_\mathit{attr\_picked} < \mathit{penalty'}_\mathit{attr\_unpicked}
 \end{equation}
 %
-ในที่นี่ เราจะคำนวณช่วงของค่า $\mathit{weight'}_\mathit{attr\_picked}$ ที่เป็นไปได้ ดังอสมการ
+โดยการที่เรากำลังจะปรับลดค่า $\mathit{weight'}_\mathit{attr\_picked}$ นั้นทำให้ทราบว่าค่า penalty ใหม่ของทั้งโปรไฟล์ที่ไม่ถูกเลือก
+(เรียกว่า $\mathit{penalty'_\mathit{all\_unpicked}}$) นั้นมีค่าน้อยกว่า ค่า penalty เก่าของทั้งโปรไฟล์ที่ไม่ถูกเลือก(เรียกว่า $\mathit{penalty_\mathit{all\_unpicked}}$) ดังอสมการ
+\begin{equation}
+  \mathit{penalty'_\mathit{all\_unpicked}} < \mathit{penalty_\mathit{all\_unpicked}}
+\end{equation}
+%
+เมื่อขยายพจน์ออกมาจะได้ดังอสมการ
+\begin{equation}
+  \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_picked}} 
+  < \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_unpicked}}
+\end{equation}
+โดยที่
+\begin{align}
+  \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_picked}} &= 
+  \mathit{weight'_\mathit{attr1}} \Delta\mathit{attr1_\mathit{picked}} 
+  + \mathit{weight_\mathit{attr2}} \Delta\mathit{attr2_\mathit{picked}} \\
+  \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_unpicked}} &= 
+  \mathit{weight'_\mathit{attr1}} \Delta\mathit{attr1_\mathit{unpicked}} 
+  + \mathit{weight_\mathit{attr2}} \Delta\mathit{attr2_\mathit{unpicked}}
+\end{align}
+%
+จัดรูปใหม่จะได้ว่า
+\begin{equation}
+  \mathit{weight'_\mathit{attr1}} 
+  (\Delta\mathit{attr1_\mathit{picked}} - \Delta\mathit{attr1_\mathit{unpicked}})
+  < \mathit{weight_\mathit{attr2}} 
+  (\Delta\mathit{attr2_\mathit{unpicked}} - \Delta\mathit{attr2_\mathit{picked}})
+\end{equation}
+%
+ทำให้ทราบว่าท้ายที่สุดแล้วค่า $\mathit{weight'_\mathit{attr1}}$ หรือก็คือ $\mathit{weight'_\mathit{attr\_picked}}$ 
+มีค่าดังอสมการ
+\begin{equation}
+  \mathit{weight'_\mathit{attr1}} 
+  < \mathit{weight_\mathit{attr2}} 
+  \frac{|\Delta\mathit{attr2_\mathit{unpicked}} - \Delta\mathit{attr2_\mathit{picked}}|}{|\Delta\mathit{attr1_\mathit{picked}} - \Delta\mathit{attr1_\mathit{unpicked}}|}
+\end{equation}
+แต่จากการที่อัลกอริทึมทำการสร้างโปรไฟล์ที่ปรับแต่งแค่ 1 ลักษณะจาก preference ต่อ 1 โปรไฟล์ดังตัวอย่างในรูปที่ \ref{fig:weight-adjust} หมายความว่าค่า
+$\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{unpicked}}$ มีค่าเป็น 0 ดังอสมการ
+\begin{equation}
+  \mathit{weight'_\mathit{attr1}} 
+  < \mathit{weight_\mathit{attr2}} 
+  \frac{\Delta\mathit{attr2_\mathit{unpicked}}}{\Delta\mathit{attr1_\mathit{picked}}}
+\end{equation}
+ซึ่งก็คืออสมการ
+\begin{equation}
+  \mathit{weight'_\mathit{attr\_picked}} 
+  < \mathit{weight_\mathit{attr\_unpicked}} 
+  \frac{\Delta\mathit{attr_\mathit{unpicked}}}{\Delta\mathit{attr_\mathit{picked}}}
+\end{equation}
+หรือ
+\begin{equation}
+  \mathit{weight'_\mathit{attr\_picked}} 
+  < \frac{penalty_\mathit{attr\_unpicked}}
+  {\Delta\mathit{attr_\mathit{picked}}}
+  \label{equa:weight-max}
+\end{equation}
+โดยที่
+\begin{equation}
+  \mathit{penalty_\mathit{attr\_unpicked}} = \mathit{weight_\mathit{attr\_unpicked}} \Delta\mathit{attr_\mathit{unpicked}}
+\end{equation}
+จากอสมการ \ref{equa:weight-max} ทำให้ทราบค่าขอบบนของ $\mathit{weight'_\mathit{attr\_picked}}$ 
+(เรียกว่า $\mathit{weight'}_\mathit{max}$) ดังนั้นเพื่อความง่ายจึงใช้ขอบล่างของ $\mathit{weight'_\mathit{attr\_picked}}$ 
+(เรียกว่า $\mathit{weight'}_\mathit{min}$) ดังสมการ
+\begin{equation}
+  \mathit{weight'}_\mathit{min} = \frac{\mathit{penalty}_\mathit{attr\_unpicked}}{\Delta \mathit{attr}_\mathit{picked} + 1}
+\end{equation}
+%
+ดังนั้นจากข้อมูลข้างต้นเราจะสามารถคำนวณช่วงของค่า $\mathit{weight'}_\mathit{attr\_picked}$ ที่เป็นไปได้ ดังอสมการ
 \begin{equation}
   \mathit{weight'}_\mathit{min}
   < \mathit{weight'}_\mathit{attr\_picked} 
@@ -136,8 +211,8 @@ $\mathit{penalty'}_\mathit{attr\_unpicked}$) ซึ่งก็คืออส�
 \end{equation}
 โดยที่
 \begin{align}
-  \mathit{weight'}_\mathit{min} &= \mathit{penalty}_\mathit{attr\_unpicked}/(\Delta \mathit{attr}_\mathit{picked} + 1) \\
-  \mathit{weight'}_\mathit{max} &= \mathit{penalty}_\mathit{attr\_unpicked}/(\Delta \mathit{attr}_\mathit{picked})
+  \mathit{weight'}_\mathit{min} &= \frac{\mathit{penalty}_\mathit{attr\_unpicked}}{\Delta \mathit{attr}_\mathit{picked} + 1} \\
+  \mathit{weight'}_\mathit{max} &= \frac{\mathit{penalty}_\mathit{attr\_unpicked}}{\Delta \mathit{attr}_\mathit{picked}}
 \end{align}
 หลังจากทราบข้อจำกัดข้างต้นแล้ว เราจะกำหนด $\mathit{weight'}_\mathit{attr\_picked}$ เป็นค่ากึ่งกลางระหว่าง $\mathit{weight'}_\mathit{min}$ 
 และ $\mathit{weight'}_\mathit{max}$
