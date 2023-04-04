@@ -139,20 +139,20 @@ $\mathit{penalty'}_\mathit{attr\_unpicked}$) ซึ่งก็คืออส�
 โดยการที่เรากำลังจะปรับลดค่า $\mathit{weight'}_\mathit{attr\_picked}$ นั้นทำให้ทราบว่าค่า penalty ใหม่ของทั้งโปรไฟล์ที่ไม่ถูกเลือก
 (เรียกว่า $\mathit{penalty'_\mathit{all\_unpicked}}$) นั้นมีค่าน้อยกว่า ค่า penalty เก่าของทั้งโปรไฟล์ที่ไม่ถูกเลือก(เรียกว่า $\mathit{penalty_\mathit{all\_unpicked}}$) ดังอสมการ
 \begin{equation}
-  \mathit{penalty'_\mathit{all\_unpicked}} < \mathit{penalty_\mathit{all\_unpicked}}
+  \mathit{penalty'_\mathit{all\_picked}} < \mathit{penalty_\mathit{all\_unpicked}}
 \end{equation}
 %
 เมื่อขยายพจน์ออกมาจะได้ดังอสมการ
 \begin{equation}
-  \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_picked}} 
-  < \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_unpicked}}
+  \sum_{\mathit{attr\_picked} = 1}^{n} \mathit{penalty_\mathit{attr\_picked}} 
+  < \sum_{\mathit{attr\_unpicked} = 1}^{n} \mathit{penalty_\mathit{attr\_unpicked}}
 \end{equation}
 โดยที่
 \begin{align}
-  \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_picked}} &= 
+  \sum_{\mathit{attr} = 1}^{n} \mathit{penalty_\mathit{attr\_picked}} &= 
   \mathit{weight'_\mathit{attr1}} \Delta\mathit{attr1_\mathit{picked}} 
   + \mathit{weight_\mathit{attr2}} \Delta\mathit{attr2_\mathit{picked}} \\
-  \sum_{\mathit{attr} = 1}^{n} \mathit{weight_\mathit{attr\_unpicked}} &= 
+  \sum_{\mathit{attr} = 1}^{n} \mathit{penalty_\mathit{attr\_unpicked}} &= 
   \mathit{weight'_\mathit{attr1}} \Delta\mathit{attr1_\mathit{unpicked}} 
   + \mathit{weight_\mathit{attr2}} \Delta\mathit{attr2_\mathit{unpicked}}
 \end{align}
@@ -303,7 +303,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
   \item นักศึกษาเข้าสู่หน้าต้อนรับของแอพพลิเคชัน แต่ยังไม่สามารถทำอะไรได้ ต้องทำการยืนยันตัวตนด้วยการคลิกปุ่ม login หรือ quick start ก่อน
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/home.png}
+            \includegraphics[width=\linewidth]{photo/web/student/home.jpeg}
           \end{center}
           \caption{หน้าต้อนรับที่ไม่ได้ยืนยันตัวตน}
           \label{fig:homepage}
@@ -312,7 +312,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
   \item นักศึกษายืนยันตัวตน โดยหน้าต่างล็อคอิน ซึ่งสามารถสร้างบัญชีใหม่ได้หากยังไม่มีบัญชี ดังรูปตัวอย่าง
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/login.png}
+            \includegraphics[width=\linewidth]{photo/web/student/login.jpeg}
           \end{center}
           \caption{หน้าต่างล็อคอิน}
           \label{fig:login}
@@ -320,7 +320,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
         
         \begin{figure}[h]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/register.png}
+            \includegraphics[width=\linewidth]{photo/web/student/register.jpeg}
           \end{center}
           \caption{หน้าต่างลงทะเบียน}
           \label{fig:register}
@@ -328,7 +328,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
         
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/home-auth.png}
+            \includegraphics[width=\linewidth]{photo/web/student/home.jpeg}
           \end{center}
           \caption{หน้าต้อนรับหลังจากการยืนยันตัวตน}
           \label{fig:homepage-auth}
@@ -346,7 +346,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
   \item นักศึกษาเริ่มต้นใช้งานจะพบกับหน้าระบุคุณลักษณะของตนเอง
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/user-profile.png}
+            \includegraphics[width=\linewidth]{photo/web/student/profile-def.jpeg}
           \end{center}
           \caption{หน้าระบุ $\mathit{profile}$ ของนักศึกษา}
           \label{fig:user-profile}
@@ -355,7 +355,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
   \item นักศึกษาระบุคุณลักษณะของผู้ร่วมอาศัยที่ต้องการ
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/mate-pref.png}
+            \includegraphics[width=\linewidth]{photo/web/student/mate-def.jpeg}
           \end{center}
           \caption{หน้าระบุ $\mathit{matePref}$ ของนักศึกษา}
           \label{fig:mate-pref}
@@ -364,7 +364,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
   \item นักศึกษาระบุห้องและหอพักที่ต้องการ
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/room-pref.png}
+            \includegraphics[width=\linewidth]{photo/web/student/dorm-def.jpeg}
           \end{center}
           \caption{หน้าระบุ $\mathit{roomPref}$ และ $\mathit{dormPref}$ ของนักศึกษา}
           \label{fig:room-pref}
@@ -373,7 +373,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
   \item นักศึกษาตรวจสอบคุณลักษณะของตนเอง และสามารถแก้ไขหากมีข้อผิดพลาดได้ด้วยปุ่ม edit
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/profile.png}
+            \includegraphics[width=\linewidth]{photo/web/student/profile.jpeg}
           \end{center}
           \caption{หน้าโปรไฟล์}
           \label{fig:profile}
@@ -382,7 +382,7 @@ $\Delta\mathit{attr2_\mathit{picked}}$ และ $\Delta\mathit{attr1_\mathit{un
   \item นักศึกษาตรวจสอบคุณลักษณะของผู้ร่วมอาศัยที่คาดว่าจะได้รับหลังจากระบบสิ้นสุดการประมวลผล
         \begin{figure}[ht]
           \begin{center}
-            \includegraphics[width=\linewidth]{photo/student/summary.png}
+            \includegraphics[width=\linewidth]{photo/web/student/summary.jpeg}
           \end{center}
           \caption{หน้าสรุปผลคุณลักษณะที่ผู้ใช้ให้ความสนใจ}
           \label{fig:summary}
